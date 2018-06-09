@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>user_management</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <router-link to="/" class="nav-link" href="#">Домой</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/profile" class="nav-link" href="#">Профиль</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/users" class="nav-link" href="#">Пользователи</router-link>
+        </li>
+      </ul>
+      <router-view></router-view>
+    </div>
+    <script src="/dist/build.js"></script>
+  </body>
+</html>
