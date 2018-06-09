@@ -3,19 +3,20 @@
         <form class="profile__form">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter name">
+                <input v-model="name" type="text" class="form-control" id="name" placeholder="Enter name">
             </div>
             <div class="form-group">
                 <label for="surname">Surname</label>
-                <input type="text" class="form-control" id="surname" placeholder="Enter surname">
+                <input v-model="surname" type="text" class="form-control" id="surname" placeholder="Enter surname">
             </div>
             <div class="form-group">
                 <label for="patronymic">Patronymic</label>
-                <input type="text" class="form-control" id="patronymic" placeholder="Enter patronymic">
+                <input v-model="patronymic" type="text" class="form-control" id="patronymic"
+                       placeholder="Enter patronymic">
             </div>
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" min="0">
+                <input v-model="age" type="number" class="form-control" id="age" min="0">
             </div>
             <button type="submit" class="btn btn-primary btn-block m-auto">Change</button>
         </form>
@@ -24,7 +25,15 @@
 
 <script>
     export default {
-        name: "Profile"
+        name: "Profile",
+        data() {
+            return {
+                name: this.$store.state.currentUser.name,
+                surname: this.$store.state.currentUser.surname,
+                patronymic: this.$store.state.currentUser.patronymic,
+                age: this.$store.state.currentUser.age
+            }
+        }
     }
 </script>
 

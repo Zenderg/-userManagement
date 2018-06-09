@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id="app">
-      <ul class="nav justify-content-center">
+      <ul class="nav justify-content-center" v-if="this.$store.state.authorized">
         <li class="nav-item">
           <router-link to="/" class="nav-link" href="#">Домой</router-link>
         </li>
@@ -15,6 +15,9 @@
         </li>
         <li class="nav-item">
           <router-link to="/users" class="nav-link" href="#">Пользователи</router-link>
+        </li>
+        <li class="nav-item d-flex">
+          <button @click="Exit" style="position: absolute; right: 10px; top:10px;" class="btn btn-danger btn-sm m-auto">Выйти</button>
         </li>
       </ul>
       <router-view></router-view>

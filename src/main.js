@@ -13,6 +13,12 @@ import {router} from './routes';
 
 new Vue({
   el: '#app',
+    methods:{
+      Exit(){
+          this.$store.commit("switchAuthorization");
+          this.$router.push('/');
+      }
+    },
     store,
     router
 });
