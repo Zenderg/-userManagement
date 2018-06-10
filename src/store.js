@@ -3,26 +3,19 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+import {mutations} from "./mutations";
+
 export const store = new Vuex.Store({
     state:{
         users:[
-            {id:1,name:"Admin",surname:"Admin",patronymic:"Admin",age:42,email:"admin@admin.com",password:"admin"}
+            {name:"Admin0",surname:"Admin",patronymic:"Admin",age:42,email:"admin@admin.com",password:"admin"},
+            {name:"Admin1",surname:"Admin",patronymic:"Admin",age:43,email:"admin@adm.com",password:"admin"},
+            {name:"Admin2",surname:"Admin",patronymic:"Admin",age:43,email:"admn@adm.com",password:"admin"},
+            {name:"Admin3",surname:"Admin",patronymic:"Admin",age:43,email:"dmin@adm.com",password:"admin"},
+            {name:"Admin4",surname:"Admin",patronymic:"Admin",age:43,email:"amin@adm.com",password:"admin"}
         ],
         currentUser:{id:0,name:"",surname:"",patronymic:"",age:0,email:"",password:""},
         authorized:false
     },
-    getters: {},
-    mutations: {
-        addUser(state, user) {
-            state.user.push(user);
-        },
-        setCurrentUser(state, user){
-            for(let key in user[0]) {
-                Vue.set(state.currentUser, key, user[0][key]);
-            }
-        },
-        switchAuthorization(state){
-            state.authorized=!state.authorized;
-        }
-    }
+    mutations: mutations
 });

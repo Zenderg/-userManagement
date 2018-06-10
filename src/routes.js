@@ -4,9 +4,9 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 //components
-import Home from './Home.vue'
-import Profile from './Profile.vue';
-import Users from './Users.vue';
+import Home from './components/Home.vue'
+import Profile from './components/Profile.vue';
+import Users from './components/Users.vue';
 
 
 const routes = [
