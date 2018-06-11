@@ -14,7 +14,8 @@ export const store = new Vuex.Store({
             {name:"Admin3",surname:"Admin",patronymic:"Admin",age:43,email:"dmin@adm.com",password:"admin"},
             {name:"Admin4",surname:"Admin",patronymic:"Admin",age:43,email:"amin@adm.com",password:"admin"}
         ],
-        currentUser:{id:0,name:"",surname:"",patronymic:"",age:0,email:"",password:""},
+        currentUser:{name:"",surname:"",patronymic:"",age:0,email:"",password:""},
+        editUser:{name:"",surname:"",patronymic:"",age:0,email:""},
         authorized:false
     },
     mutations: mutations

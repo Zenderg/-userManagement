@@ -10,6 +10,13 @@ import {store} from './store';
 
 //router
 import {router} from './routes';
+router.beforeEach((to, from, next) => {
+    if ( to.path!=="/" && !store.state.authorized ) {
+        next("/");
+    } else {
+        next();
+    }
+});
 
 new Vue({
   el: '#app',

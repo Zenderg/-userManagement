@@ -1,60 +1,8 @@
 <template>
      <div class="container">
          <button id="show-modal" @click="showAdd = true" class="btn btn-primary mb-3 mt-3">Add User</button>
-         <modal @confirm="confirmAdd(dataAdd)" v-if="showAdd" @close="showAdd = false">
-             <h4 slot="header">Add user</h4>
-             <form slot="body">
-                 <div class="form-group">
-                     <label for="nameAdd">Name</label>
-                     <input v-model="dataAdd.name" type="text" class="form-control" id="nameAdd" placeholder="Enter name">
-                 </div>
-                 <div class="form-group">
-                     <label for="surnameAdd">Surname</label>
-                     <input v-model="dataAdd.surname" type="text" class="form-control" id="surnameAdd" placeholder="Enter surname">
-                 </div>
-                 <div class="form-group">
-                     <label for="patronymicAdd">Patronymic</label>
-                     <input v-model="dataAdd.patronymic" type="text" class="form-control" id="patronymicAdd"
-                            placeholder="Enter patronymic">
-                 </div>
-                 <div class="form-group">
-                     <label for="ageAdd">Age</label>
-                     <input v-model="dataAdd.age" type="number" class="form-control" id="ageAdd" min="0">
-                 </div>
-                 <div class="form-group">
-                     <label for="emailAdd">Email address</label>
-                     <input v-model="dataAdd.email" type="email" class="form-control" id="emailAdd" placeholder="Enter email">
-                 </div>
-                 <div class="form-group">
-                     <label for="passwordAdd">Password</label>
-                     <input v-model="dataAdd.password" type="password" class="form-control" id="passwordAdd" placeholder="Password">
-                     <small class="form-text text-muted">
-                         Must not be shorter than 5 characters</small>
-                 </div>
-             </form>
-         </modal>
-         <modal @confirm="confirmEdit(dataEdit)" v-if="showEdit" @close="showEdit = false">
-             <h4 slot="header">Edit User</h4>
-             <form slot="body">
-                 <div class="form-group">
-                     <label for="nameEdit">Name</label>
-                     <input v-model="dataEdit.name" type="text" class="form-control" id="nameEdit" placeholder="Enter name">
-                 </div>
-                 <div class="form-group">
-                     <label for="surnameEdit">Surname</label>
-                     <input v-model="dataEdit.surname" type="text" class="form-control" id="surnameEdit" placeholder="Enter surname">
-                 </div>
-                 <div class="form-group">
-                     <label for="patronymicEdit">Patronymic</label>
-                     <input v-model="dataEdit.patronymic" type="text" class="form-control" id="patronymicEdit"
-                             placeholder="Enter patronymic">
-                 </div>
-                 <div class="form-group">
-                     <label for="ageEdit">Age</label>
-                     <input v-model="dataEdit.age"  type="number" class="form-control" id="ageEdit" min="0">
-                 </div>
-             </form>
-         </modal>
+         <modal-add v-if="showAdd" @close="showAdd = false"></modal-add>
+         <modal-edit v-if="showEdit" @close="showEdit = false"></modal-edit>
          <table class="table">
              <tr>
                  <th>Name</th>
@@ -79,7 +27,8 @@
 </template>
 
 <script>
-    import Modal from "./Modal.vue";
+    import ModalEdit from "./ModalEdit.vue";
+    import ModalAdd from "./ModalAdd.vue";
 
     export default {
         name: "Users",
@@ -89,27 +38,9 @@
                 currentUser: this.$store.state.currentUser,
                 showAdd: false,
                 showEdit: false,
-                dataEdit:{
-                    name:"",
-                    surname:"",
-                    patronymic:"",
-                    age:0,
-                    email:""
-                },
-                dataAdd:{
-                    name:"",
-                    surname:"",
-                    patronymic:"",
-                    age:0,
-                    email:"",
-                    password:""
-                }
             }
         },
         methods:{
-            addUser(){
-
-            },
             editUser(email){
                 this.showEdit = true;
 
@@ -120,27 +51,17 @@
                 });
 
                 let user=this.users[index];
-                this.fillDataEdit(user.name, user.surname, user.patronymic, user.age, user.email);
+                for (let key in user) {
+                    this.$set(this.$store.state.editUser, key, user[key]);
+                }
             },
             deleteUser(email){
                 this.$store.commit("deleteUser", email);
-            },
-            fillDataEdit(name,surname, patronymic, age, email){
-                this.dataEdit.name=name;
-                this.dataEdit.surname=surname;
-                this.dataEdit.patronymic=patronymic;
-                this.dataEdit.age=age;
-                this.dataEdit.email=email;
-            },
-            confirmEdit(dataEdit){
-                this.$store.commit("saveChangesUser", dataEdit);
-            },
-            confirmAdd(dataAdd){
-                this.$store.commit("addUser", dataAdd);
             }
         },
         components:{
-            Modal
+            ModalEdit,
+            ModalAdd
         }
     }
 </script>

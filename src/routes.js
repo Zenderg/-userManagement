@@ -8,11 +8,11 @@ import Home from './components/Home.vue'
 import Profile from './components/Profile.vue';
 import Users from './components/Users.vue';
 
-
 const routes = [
     { path: '/', component: Home },
     { path: '/profile', component: Profile },
-    { path: '/users', component: Users }
+    { path: '/users', component: Users },
+    { path: '*', redirect: to => "/"}
 ];
 
 export const router = new VueRouter({
