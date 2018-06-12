@@ -9,13 +9,13 @@ import Profile from './components/Profile.vue';
 import Users from './components/Users.vue';
 
 const routes = [
-    { path: '/', component: Home },
-    { path: '/profile', component: Profile },
-    { path: '/users', component: Users },
-    { path: '*', redirect: to => "/"}
+    {path: '/', component: Home},
+    {path: '/profile', component: Profile},
+    {path: '/users', component: Users},
+    {path: '*', redirect: to => "/"}
 ];
 
 export const router = new VueRouter({
-    mode:'history',
+    mode: 'history',
     routes
 });

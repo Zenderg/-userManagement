@@ -20,10 +20,10 @@
                         <slot name="footer">
                             <div class="d-flex justify-content-end">
                                 <button class="btn" @click="$emit('close')">
-                                    Cancel
+                                    Отмена
                                 </button>
                                 <button class="btn btn-success ml-3" @click="confirm">
-                                    Confirm
+                                    Подтвердить
                                 </button>
                             </div>
                         </slot>
@@ -38,9 +38,8 @@
 <script>
     export default {
         name: "Modal",
-        methods:{
-            confirm(){
-                this.$emit('close');
+        methods: {
+            confirm() {
                 this.$emit('confirm');
             }
         }
@@ -84,6 +83,7 @@
     .modal-body {
         margin: 20px 0;
     }
+
     .modal-enter {
         opacity: 0;
     }

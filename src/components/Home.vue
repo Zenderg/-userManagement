@@ -4,27 +4,27 @@
         <div v-if="!this.$store.state.authorized" class="login">
             <form class="login__form">
                 <div class="form-group">
-                    <label for="email">Email address</label>
+                    <label for="email">Email</label>
                     <input v-model="email" @change="invalid.email=false" type="email"
                            :class="[{'is-invalid':invalid.email}, 'form-control']"
-                           id="email" placeholder="Enter email">
+                           id="email" placeholder="Введите email">
                     <div class="invalid-feedback">
                         {{ errors.email }}
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Пароль</label>
                     <input v-model="password" @change="invalid.password=false" type="password"
                            :class="[{'is-invalid':invalid.password}, 'form-control']"
-                           id="password" placeholder="Password">
+                           id="password" placeholder="Пароль">
                     <small class="form-text text-muted">
-                        Must not be shorter than 5 characters
+                        Должен быть не менее {{ $store.state.minPasswordLength }} символов
                     </small>
                     <div class="invalid-feedback">
                         {{ errors.password }}
                     </div>
                 </div>
-                <button @click.prevent="sendForm" class="btn btn-primary btn-block">LOGIN</button>
+                <button @click.prevent="sendForm" class="btn btn-primary btn-block">ВХОД</button>
             </form>
         </div>
     </div>
@@ -78,14 +78,18 @@
             },
             checkOnErrors() {
                 //проверка длины пароля
-                if (this.password.length < 5) {
-                    return {access: false, msg: "Пароль должен быть длиннее 5 символов", name: "password"};
+                if (this.password.length < this.$store.state.minPasswordLength) {
+                    return {
+                        access: false,
+                        msg: "Пароль должен быть не менее " + this.$store.state.minPasswordLength + " символов",
+                        name: "password"
+                    };
                 }
 
                 // проверка корректности email
                 let accuracy = this.email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
-                if (!accuracy){
-                    return {access: false, msg: "Некоректный Email", name: "email"};
+                if (!accuracy) {
+                    return {access: false, msg: "Некорректный Email", name: "email"};
                 }
 
                 //поиск пользователя по email
@@ -102,7 +106,7 @@
                     return {access: false, msg: "Неправильный пароль", name: "password"};
                 }
 
-                return {access: true, msg: "Доступ разрешен", user:user};
+                return {access: true, msg: "Доступ разрешен", user: user};
             },
             checkEmail() {
                 let arr = this.$store.state.users;

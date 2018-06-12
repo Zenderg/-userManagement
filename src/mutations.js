@@ -13,6 +13,7 @@ export const mutations = {
         state.authorized = !state.authorized;
     },
     saveChangesUser(state, user) {
+        user.age = parseInt(user.age, 10);
         let index = findUserIndexByEmail(state.users, user.email);
 
         if (user.email === state.currentUser.email) {
@@ -26,6 +27,7 @@ export const mutations = {
         }
     },
     saveChangesProfile(state, user) {
+        user.age = parseInt(user.age, 10);
         for (let key in user) {
             Vue.set(state.currentUser, key, user[key]);
         }
